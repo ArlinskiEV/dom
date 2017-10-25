@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<style>
+body {
+    margin: 0;
+}
+.container > * + * {
+    margin-top: 10px;
+}
+.red,
+.yellow {
+    padding: 20px;
+}
+.red {
+    background: #fbb;
+}
+.yellow {
+    background: #ffb;
+}
+.blue,
+.green {
+    width: 50%;
+    padding: 5px 10px;
+}
+.blue {
+    background: #bbf;
+}
+.green {
+    background: #bfb;
+}
+input {
+    display: none;
+}
+</style>
+<div id="red" class="red container">
+    <div id="green_0" class="green" name="green_0" aBc="123" tabindex="5">
+        green_0
+        <input name="green_input" />
+    </div>
+    <div id="green_1" class="green" tabindex="3">green_1</div>
+    <div id="green_2" class="green" tabindex="2">green_2</div>
+</div>
+<div id="yellow" class="yellow container"
+    ><div id="blue_0" class="blue" tabindex="0">blue_0</div
+    ><div id="blue_1" class="blue">blue_1</div
+    ><div id="blue_2" class="blue"></div
+></div>
+<script>
+    const q = document.querySelector.bind(document);
+</script>

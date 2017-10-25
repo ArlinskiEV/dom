@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<body style="background: #fbb;">
+    <div style="background: #bfb;">
+        <div style="background: #bbf;" tabindex="0">
+            <div style="background: #ffb;" draggable="true"></div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        overflow: hidden;
+        margin: 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    body [style] {
+        position: absolute;
+        top: 10%;
+        left: 120px;
+        right: 10%;
+        bottom: 10%;
+        overflow: hidden;
+    }
+    .entry {
+        pointer-events: none;
+    }
+    .hide {
+        opacity: 0;
+        transition: opacity 4s;
+    }
+</style>
+<script>
+    const events = [
+        'click',
+        // 'mousedown',
+        // 'mouseup',
+        // 'dblclick',
+        // 'contextmenu',
+
+        // 'mouseenter',
+        // 'mouseleave',
+        // 'mouseover',
+        // 'mouseout',
+        // 'mousemove',
+
+        // 'keydown',
+        // 'keypress',
+        // 'keyup',
+
+        // 'dragstart',
+        // 'dragend',
+        // 'drag',
+        // 'drop',
+        // 'dragenter',
+        // 'dragleave',
+        // 'dragover',
+        
+        // 'focus',
+        // 'blur',
+        // 'focusin',
+        // 'focusout',
+
+        // 'touchstart',
+        // 'touchend',
+        // 'touchmove',
+        // 'touchcancel',
+    ];
+
+    document.querySelectorAll('[style]').forEach(node => {
+        events.forEach(eventName => {
+            // bubbling
+            node.addEventListener(eventName, event => {
+                log(event, node);
+            });
+            // capturing
+            // node.addEventListener(eventName, event => {
+            //     log(event, node);
+            // }, true);
+        });
+    });
+
+    // delegation
+    // events.forEach(eventName => {
+    //     document.body.addEventListener(eventName, event => {
+    //         log(event, event.target);
+    //         log(event, event.currentTarget);
+    //     });
+    // });
+
+    let counter = 0;
+
+    function log(event, node) {
+        // if (counter > 20) {
+        //     event.stopPropagation();
+        //     event.preventDefault();
+        // }
+        const entry = create(`<div class="entry">${event.type} ${counter++}</div>`);
+        node.insertBefore(entry, node.childNodes[0]);
+        setTimeout(() => entry.classList.add('hide'), 1000);
+    }
+
+    function create(html) {
+        const container = document.createElement('div');
+        container.innerHTML = html;
+        return container.childNodes[0];
+    }
+</script>
